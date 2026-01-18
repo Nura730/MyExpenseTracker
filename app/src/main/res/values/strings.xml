@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MyExpenseTracker</string>
+    <string-array name="categories">
+        <item>Food</item>
+        <item>Travel</item>
+        <item>Bills</item>
+        <item>Shopping</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="filter_options">
+        <item>All</item>
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>This Week</item>
+        <item>This Month</item>
+    </string-array>
+
+</resources>
