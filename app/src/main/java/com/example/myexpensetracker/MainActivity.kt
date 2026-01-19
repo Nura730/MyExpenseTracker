@@ -31,28 +31,31 @@ class MainActivity : AppCompatActivity() {
         tvBudget = findViewById(R.id.tvBudget)
         pieChart = findViewById(R.id.pieChart)
 
-        val btnAdd = findViewById<Button>(R.id.btnAdd)
-        val btnReport = findViewById<Button>(R.id.btnReport)
-        val btnSettings = findViewById<Button>(R.id.btnSettings)
-        val btnChange = findViewById<Button>(R.id.btnChangePin)
         val btnSetBudget = findViewById<Button>(R.id.btnSetBudget)
+
+        // Bottom nav
+        val navHome = findViewById<ImageButton>(R.id.navHome)
+        val navAdd = findViewById<ImageButton>(R.id.navAdd)
+        val navReport = findViewById<ImageButton>(R.id.navReport)
+        val navSettings = findViewById<ImageButton>(R.id.navSettings)
 
         setupFilterSpinner()
 
-        btnAdd.setOnClickListener {
+        // NAV ACTIONS
+        navAdd.setOnClickListener {
             startActivity(Intent(this, AddExpenseActivity::class.java))
         }
 
-        btnReport.setOnClickListener {
+        navReport.setOnClickListener {
             startActivity(Intent(this, ReportActivity::class.java))
         }
 
-        btnSettings.setOnClickListener {
+        navSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
-        btnChange.setOnClickListener {
-            showChangePinDialog()
+        navHome.setOnClickListener {
+            loadData()
         }
 
         btnSetBudget.setOnClickListener {
@@ -362,66 +365,6 @@ class MainActivity : AppCompatActivity() {
 
         pieChart.data = PieData(dataSet)
         pieChart.invalidate()
-    }
-
-    // ---------------- CHANGE PIN ----------------
-
-    private fun showChangePinDialog() {
-
-        val layout = LinearLayout(this)
-        layout.orientation = LinearLayout.VERTICAL
-        layout.setPadding(40, 20, 40, 10)
-
-        val oldPin = EditText(this)
-        oldPin.hint = "Old PIN"
-        oldPin.inputType =
-            android.text.InputType.TYPE_CLASS_NUMBER or
-                    android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
-
-        val newPin = EditText(this)
-        newPin.hint = "New PIN"
-        newPin.inputType = oldPin.inputType
-
-        layout.addView(oldPin)
-        layout.addView(newPin)
-
-        AlertDialog.Builder(this)
-            .setTitle("Change PIN")
-            .setView(layout)
-            .setPositiveButton("SAVE") { _, _ ->
-
-                val pref =
-                    getSharedPreferences("security", MODE_PRIVATE)
-
-                val saved =
-                    pref.getString("pin", null)
-
-                if (oldPin.text.toString() == saved) {
-
-                    pref.edit()
-                        .putString(
-                            "pin",
-                            newPin.text.toString()
-                        )
-                        .apply()
-
-                    Toast.makeText(
-                        this,
-                        "PIN updated",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                } else {
-
-                    Toast.makeText(
-                        this,
-                        "Wrong old PIN",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
     }
 
     // ---------------- BUDGET ----------------

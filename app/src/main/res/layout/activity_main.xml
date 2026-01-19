@@ -13,14 +13,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_glass"
             android:padding="16dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="12dp">
+            android:orientation="vertical">
 
-
-        <!-- TITLE -->
+            <!-- TITLE -->
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="My Expense"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -28,15 +27,17 @@
 
             <!-- GLASS CARD -->
             <LinearLayout
-                android:background="@drawable/bg_glass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass"
                 android:layout_marginTop="14dp"
                 android:orientation="vertical"
                 android:padding="18dp">
 
                 <TextView
                     android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="₹0"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -44,12 +45,16 @@
 
                 <TextView
                     android:id="@+id/tvBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Budget: Not set"
                     android:textColor="#CCCCCC"
                     android:layout_marginTop="6dp"/>
 
                 <Button
                     android:id="@+id/btnSetBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Set Budget"
                     android:background="@drawable/bg_btn"
                     android:textColor="#fff"
@@ -93,27 +98,35 @@
 
         <ImageButton
             android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/ic_home"
-            android:background="@android:color/transparent"
-            android:layout_weight="1"/>
+            android:background="@android:color/transparent"/>
 
         <ImageButton
             android:id="@+id/navAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/ic_add"
-            android:background="@android:color/transparent"
-            android:layout_weight="1"/>
+            android:background="@android:color/transparent"/>
 
         <ImageButton
             android:id="@+id/navReport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/ic_chart"
-            android:background="@android:color/transparent"
-            android:layout_weight="1"/>
+            android:background="@android:color/transparent"/>
 
         <ImageButton
             android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/ic_settings"
-            android:background="@android:color/transparent"
-            android:layout_weight="1"/>
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </RelativeLayout>
