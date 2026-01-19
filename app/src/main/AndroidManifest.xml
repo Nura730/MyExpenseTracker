@@ -29,6 +29,11 @@
             android:exported="false"/>
 
         <activity
+            android:name=".MonthlyReportActivity"
+            android:exported="false"/>
+
+
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"/>
 

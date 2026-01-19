@@ -52,8 +52,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         navReport.setOnClickListener {
-            startActivity(Intent(this, ReportActivity::class.java))
+            startActivity(Intent(this, MonthlyReportActivity::class.java))
         }
+
 
         navSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))

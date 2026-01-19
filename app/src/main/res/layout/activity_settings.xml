@@ -1,73 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212">
+    android:background="@drawable/bg_gradient"
+    android:paddingTop="24dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- HEADER -->
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:text="Settings"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:textSize="22sp"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+    <!-- CONTENT -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvHeader">
 
-        <Button
-            android:id="@+id/btnTheme"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Toggle Theme"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnBackup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Backup Data"/>
+            <!-- CARD -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_glass"
+                android:orientation="vertical"
+                android:padding="18dp">
 
-        <Button
-            android:id="@+id/btnRestore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Restore Backup"/>
+                <Button
+                    android:id="@+id/btnTheme"
+                    android:text="Toggle Theme"
+                    android:background="@drawable/bg_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <Button
-            android:id="@+id/btnCSV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Export CSV"/>
+                <Button
+                    android:id="@+id/btnBackup"
+                    android:text="Backup Data"
+                    android:background="@drawable/bg_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"/>
 
-        <Button
-            android:id="@+id/btnChangePin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change PIN"/>
+                <Button
+                    android:id="@+id/btnRestore"
+                    android:text="Restore Backup"
+                    android:background="@drawable/bg_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"/>
 
-        <Switch
-            android:id="@+id/switchBio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enable Fingerprint"
-            android:textColor="#FFFFFF"/>
+                <Button
+                    android:id="@+id/btnCSV"
+                    android:text="Export CSV"
+                    android:background="@drawable/bg_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"/>
 
-        <Button
-            android:id="@+id/btnTimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Auto Lock Timer"/>
+                <Button
+                    android:id="@+id/btnChangePin"
+                    android:text="Change PIN"
+                    android:background="@drawable/bg_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"/>
 
-        <Button
-            android:id="@+id/btnReset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reset App"
-            android:backgroundTint="#B00020"/>
+                <!-- BIOMETRIC -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="14dp">
 
-    </LinearLayout>
-</ScrollView>
+                    <TextView
+                        android:text="Enable Fingerprint"
+                        android:textColor="@android:color/white"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <Switch
+                        android:id="@+id/switchBio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnTimer"
+                    android:text="Auto Lock Timer"
+                    android:background="@drawable/bg_btn"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"/>
+
+                <!-- DANGER -->
+                <Button
+                    android:id="@+id/btnReset"
+                    android:text="Reset App"
+                    android:backgroundTint="#B00020"
+                    android:textColor="@android:color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
