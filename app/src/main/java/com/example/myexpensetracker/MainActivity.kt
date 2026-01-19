@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnSetBudget = findViewById<Button>(R.id.btnSetBudget)
 
-        // Bottom nav
+        // Bottom Nav
         val navHome = findViewById<ImageButton>(R.id.navHome)
         val navAdd = findViewById<ImageButton>(R.id.navAdd)
         val navReport = findViewById<ImageButton>(R.id.navReport)
@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         setupFilterSpinner()
 
         // NAV ACTIONS
+        navHome.setOnClickListener {
+            loadData()
+            Toast.makeText(this,"Home",Toast.LENGTH_SHORT).show()
+        }
+
         navAdd.setOnClickListener {
             startActivity(Intent(this, AddExpenseActivity::class.java))
         }
@@ -52,10 +57,6 @@ class MainActivity : AppCompatActivity() {
 
         navSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
-        }
-
-        navHome.setOnClickListener {
-            loadData()
         }
 
         btnSetBudget.setOnClickListener {
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         loadData()
     }
 
-    // ---------------- FILTER SETUP ----------------
+    // ---------------- FILTER ----------------
 
     private fun setupFilterSpinner() {
 
@@ -200,40 +201,32 @@ class MainActivity : AppCompatActivity() {
             "Today" -> {
                 cal.timeInMillis = now
                 val d1 = cal.get(Calendar.DAY_OF_YEAR)
-
                 cal.timeInMillis = time
                 val d2 = cal.get(Calendar.DAY_OF_YEAR)
-
                 d1 == d2
             }
 
             "Yesterday" -> {
                 cal.timeInMillis = now
                 val d1 = cal.get(Calendar.DAY_OF_YEAR) - 1
-
                 cal.timeInMillis = time
                 val d2 = cal.get(Calendar.DAY_OF_YEAR)
-
                 d1 == d2
             }
 
             "This Week" -> {
                 cal.timeInMillis = now
                 val w1 = cal.get(Calendar.WEEK_OF_YEAR)
-
                 cal.timeInMillis = time
                 val w2 = cal.get(Calendar.WEEK_OF_YEAR)
-
                 w1 == w2
             }
 
             "This Month" -> {
                 cal.timeInMillis = now
                 val m1 = cal.get(Calendar.MONTH)
-
                 cal.timeInMillis = time
                 val m2 = cal.get(Calendar.MONTH)
-
                 m1 == m2
             }
 
@@ -252,19 +245,15 @@ class MainActivity : AppCompatActivity() {
 
         val et = EditText(this)
         et.setText(parts[0])
-        et.inputType =
-            android.text.InputType.TYPE_CLASS_NUMBER
+        et.inputType = android.text.InputType.TYPE_CLASS_NUMBER
 
         AlertDialog.Builder(this)
             .setTitle("Edit Amount")
             .setView(et)
             .setPositiveButton("SAVE") { _, _ ->
 
-                val newAmount =
-                    et.text.toString().trim()
-
-                if (newAmount.isEmpty())
-                    return@setPositiveButton
+                val newAmount = et.text.toString().trim()
+                if (newAmount.isEmpty()) return@setPositiveButton
 
                 val newLine =
                     "$newAmount|${parts[1]}|${parts[2]}|${parts[3]}"
@@ -323,20 +312,20 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    // ---------------- PIE CHART ----------------
+    // ---------------- PIE ----------------
 
     private fun loadPieChart() {
 
         val pref =
             getSharedPreferences("expense", MODE_PRIVATE)
 
-        val data =
+        val rawData =
             pref.getString("list", "") ?: ""
 
         val map =
             HashMap<String, Float>()
 
-        for (line in data.split("\n")) {
+        for (line in rawData.split("\n")) {
 
             if (line.isBlank()) continue
 
@@ -360,12 +349,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         val dataSet =
-            PieDataSet(entries, "Categories")
-        dataSet.valueTextSize = 12f
+            PieDataSet(entries, "")
 
-        pieChart.data = PieData(dataSet)
-        pieChart.invalidate()
+        dataSet.colors = listOf(
+            0xFF00E5FF.toInt(),
+            0xFF7C4DFF.toInt(),
+            0xFFFF5252.toInt(),
+            0xFF69F0AE.toInt(),
+            0xFFFFD740.toInt()
+        )
+
+        dataSet.valueTextColor =
+            android.graphics.Color.WHITE
+
+        pieChart.apply {
+            setUsePercentValues(false)
+            description.isEnabled = false
+            isDrawHoleEnabled = true
+            holeRadius = 60f
+            setHoleColor(android.graphics.Color.TRANSPARENT)
+            legend.isEnabled = false
+            this.data = PieData(dataSet)   // ✔ correct
+            invalidate()
+        }
     }
+
 
     // ---------------- BUDGET ----------------
 
